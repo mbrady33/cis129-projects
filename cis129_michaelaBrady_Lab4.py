@@ -1,75 +1,41 @@
-# Module 5 Lab-5
-# Michaela Brady
-# 9/27/2024
-# This code calculates and prints bonus amounts for a retail company
-# based on monthly sales figures and sales increases.
-# The main function
+# Lab 5 The Bottle Return Program
+# Name: Michaela Brady
+# Date: 10/7/24
+# Description: This program calculates the total number of bottles returned over seven days
+# and computes the total payout at $0.10 per bottle.
+
+def get_bottles():
+    NBR_OF_DAYS = 7  # Constant for the number of days
+
+    while True:  # Loop to allow multiple weeks of data entry
+        total_bottles = 0  # Accumulator for total bottles
+        counter = 0  # Counter for days
+
+        # Loop through each day to get the number of bottles returned
+        while counter < NBR_OF_DAYS:
+            try:
+                today_bottles = int(input(f"Enter number of bottles returned for day #{counter + 1}: "))
+                if today_bottles < 0:
+                    print("Please enter a non-negative number.")
+                    continue  # Skip to the next iteration if the input is negative
+                total_bottles += today_bottles  # Accumulate total bottles
+                counter += 1  # Increment the counter
+            except ValueError:
+                print("Invalid input. Please enter a valid integer.")
+
+        # Calculate total payout
+        total_payout = total_bottles * 0.10
+        print(f"\nTotal bottles returned: {total_bottles}")
+        print(f"Total amount paid out: ${total_payout:.2f}\n")
+
+        # Ask if the user wants to enter more data
+        more_data = input("Do you have more data to enter? (yes/no): ").strip().lower()
+        if more_data != 'yes':
+            print("Thank you for using the bottle tracking program.")
+            break  # Exit the loop if the user does not want to continue
 
 def main():
-    # Declare local variables
-    monthlySales = 0  # Monthly sales amount
-    storeAmount = 0   # Store bonus amount
-    empAmount = 0     # Employee bonus amount
-    salesIncrease = 0  # Percent of sales increase
+    get_bottles()  # Call the get_bottles function to start the program
 
-    # Call to getSales(monthlySales)
-    monthlySales = getSales("Enter the monthly sales amount: ")
-
-    # Call to getIncrease(salesIncrease)
-    salesIncrease = getIncrease("Enter the percent of sales increase: ")
-
-    # Call to calcStoreBonus(storeAmount)
-    storeAmount = calcStoreBonus(monthlySales)
-
-    # Call to calcEmpBonus(empAmount)
-    empAmount = calcEmpBonus(salesIncrease)
-
-    # Call to printBonus(storeAmount, empAmount)
-    printBonus(storeAmount, empAmount)
-
-# This function gets the monthly sales
-def getSales(prompt):
-    monthlySales = float(input(prompt))
-    return monthlySales
-
-# This function gets the percent of increase in sales
-def getIncrease(prompt):
-    salesIncrease = float(input(prompt))
-    salesIncrease = salesIncrease / 100
-    return salesIncrease
-
-# This function determines the storeAmount bonus
-def calcStoreBonus(monthlySales):
-    if monthlySales >= 110000:
-        storeAmount = 6000
-    elif monthlySales >= 100000:
-        storeAmount = 5000
-    elif monthlySales >= 90000:
-        storeAmount = 4000
-    elif monthlySales >= 80000:
-        storeAmount = 3000
-    else:
-        storeAmount = 0
-    return storeAmount
-
-# This function determines the empAmount bonus
-def calcEmpBonus(salesIncrease):
-    if salesIncrease >= 0.05:
-        empAmount = 75
-    elif salesIncrease >= 0.04:
-        empAmount = 50
-    elif salesIncrease >= 0.03:
-        empAmount = 40
-    else:
-        empAmount = 0
-    return empAmount
-
-# This function prints the bonus information
-def printBonus(storeAmount, empAmount):
-    print("The store bonus amount is $", storeAmount)
-    print("The employee bonus amount is $", empAmount)
-    if storeAmount == 6000 and empAmount == 75:
-        print('Congrats! You have reached the highest bonus amounts possible!')
-
-# Call main
+# Start the program by calling the main function
 main()
