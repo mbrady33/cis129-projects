@@ -1,0 +1,64 @@
+# Theater Seating Lab
+
+# Constants for seating sections
+SECTION_A = "A"
+SECTION_B = "B"
+SECTION_C = "C"
+
+# Constants for ticket prices
+PRICE_A = 20
+PRICE_B = 15
+PRICE_C = 10
+
+# Constants for number of seats
+SEATS_A = 300
+SEATS_B = 500
+SEATS_C = 200
+
+def get_valid_tickets_sold(section, seats):
+    while True:
+        try:
+            tickets_sold = int(input(f"Enter the number of tickets sold for section {section}: "))
+            if 0 <= tickets_sold <= seats:
+                return tickets_sold
+            else:
+                print(f"Invalid number of tickets. Please enter a value between 0 and {seats}.")
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+
+def calculate_section_income(section, tickets_sold, price):
+    return tickets_sold * price
+
+def main():
+    """Main function to run the ticket sales program."""
+    print("Welcome to the Theater Ticket Sales System!")
+    print(f"Section {SECTION_A}: ${PRICE_A}, {SEATS_A} seats")
+    print(f"Section {SECTION_B}: ${PRICE_B}, {SEATS_B} seats")
+    print(f"Section {SECTION_C}: ${PRICE_C}, {SEATS_C} seats")
+
+    total_income = 0
+
+    # Get tickets sold for each section and calculate income
+    tickets_a = get_valid_tickets_sold(SECTION_A, SEATS_A)
+    income_a = calculate_section_income(SECTION_A, tickets_a, PRICE_A)
+    total_income += income_a
+    print(f"Subtotal after section {SECTION_A} sales: ${total_income}")
+
+    tickets_b = get_valid_tickets_sold(SECTION_B, SEATS_B)
+    income_b = calculate_section_income(SECTION_B, tickets_b, PRICE_B)
+    total_income += income_b
+    print(f"Subtotal after section {SECTION_B} sales: ${total_income}")
+
+    tickets_c = get_valid_tickets_sold(SECTION_C, SEATS_C)
+    income_c = calculate_section_income(SECTION_C, tickets_c, PRICE_C)
+    total_income += income_c
+    print(f"Subtotal after section {SECTION_C} sales: ${total_income}")
+
+    # Display final report
+    print("\nTotal Income: $", total_income)
+    print(f"Section {SECTION_A}: {tickets_a} tickets sold, ${income_a} income")
+    print(f"Section {SECTION_B}: {tickets_b} tickets sold, ${income_b} income")
+    print(f"Section {SECTION_C}: {tickets_c} tickets sold, ${income_c} income")
+
+if __name__ == "__main__":
+    main()
